@@ -178,7 +178,18 @@ function startConfetti() {
 }
 
 // Dodge No button functionality
+// Track number of dodges
+let dodgeCount = 0;
+
 function dodgeNo() {
+        // Only dodge twice, then allow click
+    if (dodgeCount >= 2) {
+        answer('final', 'no-means-yes', 'screen-loading');
+        return;
+    }
+    
+    dodgeCount++;
+    
     const noBtn = document.getElementById('noBtn');
     const randomX = Math.random() * (window.innerWidth - 200);
     const randomY = Math.random() * (window.innerHeight - 100);
