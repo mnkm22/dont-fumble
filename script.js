@@ -16,7 +16,7 @@ function nextScreen(screenId) {
 }
 
 // Answer handler with scoring
-function answer(question, value) {
+function answer(question, value, nextScreenId) {
     userData.answers[question] = value;
 
     // Calculate score based on answer
@@ -55,6 +55,11 @@ function answer(question, value) {
     }
 
     userData.score += points;
+        
+    // Navigate to the next screen
+    if (nextScreenId) {
+        nextScreen(nextScreenId);
+    }
 }
 
 // Date input handlers
