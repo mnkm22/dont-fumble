@@ -262,3 +262,74 @@ p {
     justify-content: center;
   }
 }
+
+/* Custom date suggestion field */
+.custom-suggestion {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.custom-suggestion label {
+  display: block;
+  margin-bottom: 10px;
+  color: #fff;
+  font-size: 16px;
+}
+
+.custom-suggestion input {
+  width: 80%;
+  max-width: 400px;
+  padding: 12px;
+  border: 2px solid #ff85a1;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.custom-suggestion input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.custom-suggestion input:focus {
+  outline: none;
+  border-color: #ff0a54;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Thank you screen */
+#confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.thank-you-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.thank-you-content img {
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.glow {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #ff85a1, 0 0 30px #ff85a1;
+  }
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #ff0a54, 0 0 40px #ff0a54, 0 0 50px #ff0a54;
+  }
+}
