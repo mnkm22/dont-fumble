@@ -37,6 +37,33 @@
         #noBtn {
             position: relative;
         }
+
+        /* ── Floating music toggle ── */
+        #music-toggle {
+            display: none;
+            position: fixed;
+            bottom: 18px;
+            right: 18px;
+            width: 44px;
+            height: 38px;
+            background: var(--silver);
+            border: 3px solid;
+            border-color: var(--bevel-lt) var(--bevel-dk) var(--bevel-dk) var(--bevel-lt);
+            box-shadow: 2px 2px 0 #000;
+            cursor: pointer;
+            font-size: 1rem;
+            z-index: 9998;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Comic Neue', cursive;
+            font-weight: 700;
+            color: #000080;
+        }
+        #music-toggle:active {
+            border-color: var(--bevel-dk) var(--bevel-lt) var(--bevel-lt) var(--bevel-dk);
+            box-shadow: none;
+            transform: translate(2px, 2px);
+        }
     </style>
 </head>
 <body>
@@ -430,9 +457,9 @@
                         <h2>Congrats on not fumbling 😌</h2>
                         <div class="inset">
                             Michael will be in touch soon 💌<br><br>
-                            🏆 You just made it through a 9-screen obstacle course<br>
-                            crafted with equal parts effort and audacity.<br>
-                            Your reward? A very good drink, and possibly (dare we say) a good time. 🥂
+                            🏆 Fun fact: You just completed a 9-screen obstacle course<br>
+                            designed by a man who googled "how to talk to women" 😭<br>
+                            You deserve a medal. And also probably a drink.
                         </div>
                         <img src="https://media.giphy.com/media/111ebonMs90YLu/giphy.gif" alt="Success" style="max-width: 280px; display: block; margin: 16px auto; border: 3px solid; border-color: #fff #555 #555 #fff; box-shadow: 3px 3px 0 #000;">
                     </div>
@@ -441,6 +468,9 @@
         </section>
 
     </div>
+    <!-- Floating music toggle — hidden until user chooses Yes on music screen -->
+    <button id="music-toggle" onclick="toggleMusic()" title="Toggle music">♪</button>
+
     <script src="script.js"></script>
 </body>
 </html>
