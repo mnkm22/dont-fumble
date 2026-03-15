@@ -35,7 +35,6 @@ function updateToggle() {
 }
 
 function toggleMusic() {
-    // If they said No originally, create audio fresh on this direct click
     if (!bgMusic) {
         bgMusic = new Audio('https://mnkm22.github.io/dont-fumble/it-aint-over.mp3');
         bgMusic.loop = true;

@@ -37,33 +37,6 @@
         #noBtn {
             position: relative;
         }
-
-        /* ── Floating music toggle ── */
-        #music-toggle {
-            display: none;
-            position: fixed;
-            bottom: 18px;
-            right: 18px;
-            width: 44px;
-            height: 38px;
-            background: var(--silver);
-            border: 3px solid;
-            border-color: var(--bevel-lt) var(--bevel-dk) var(--bevel-dk) var(--bevel-lt);
-            box-shadow: 2px 2px 0 #000;
-            cursor: pointer;
-            font-size: 1rem;
-            z-index: 9998;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Comic Neue', cursive;
-            font-weight: 700;
-            color: #000080;
-        }
-        #music-toggle:active {
-            border-color: var(--bevel-dk) var(--bevel-lt) var(--bevel-lt) var(--bevel-dk);
-            box-shadow: none;
-            transform: translate(2px, 2px);
-        }
     </style>
 </head>
 <body>
@@ -72,7 +45,10 @@
         <!-- ── MUSIC CHOICE ── -->
         <section class="screen active" id="screen-music">
             <div class="marquee-wrap">
-                <span class="marquee-inner">★ WELCOME TO DONT-FUMBLE.COM ★ BEST VIEWED IN NETSCAPE NAVIGATOR ★ 800x600 RESOLUTION RECOMMENDED ★ VISITORS: 0000247 ★ &nbsp;&nbsp;&nbsp; ★ WELCOME TO DONT-FUMBLE.COM ★ BEST VIEWED IN NETSCAPE NAVIGATOR ★ 800x600 RESOLUTION RECOMMENDED ★ VISITORS: 0000247 ★</span>
+                <div class="marquee-scroll">
+                    <span class="marquee-inner">★ WELCOME TO DONT-FUMBLE.COM ★ BEST VIEWED IN NETSCAPE NAVIGATOR ★ 800x600 RESOLUTION RECOMMENDED ★ VISITORS: 0000247 ★ &nbsp;&nbsp;&nbsp; ★ WELCOME TO DONT-FUMBLE.COM ★ BEST VIEWED IN NETSCAPE NAVIGATOR ★ 800x600 RESOLUTION RECOMMENDED ★ VISITORS: 0000247 ★</span>
+                </div>
+                <button class="marquee-btn" id="music-toggle" onclick="toggleMusic()" title="Toggle music">♪</button>
             </div>
             <div class="win-box">
                 <div class="title-bar">
@@ -82,7 +58,7 @@
                     </div>
                 </div>
                 <div class="win-body">
-                    <div class="under-construction" style="color: #cc0000;">🚧 WARNING: Life-changing decisions ahead 🚧</div>
+                    <div class="under-construction">🚧 WARNING: Life-changing decisions ahead 🚧</div>
                     <h2>Enable background music?</h2>
                     <div class="inset">
                         📁 File: it-aint-over.mp3<br>
@@ -100,7 +76,9 @@
         <!-- ── HERO ── -->
         <section class="screen" id="screen-hero">
             <div class="marquee-wrap">
-                <span class="marquee-inner">💘 YOU HAVE MATCHED WITH MICHAEL 💘 DON'T BLOW IT 💘 THIS SITE IS HOT OFF THE PRESS 💘 TELL YOUR FRIENDS 💘</span>
+                <div class="marquee-scroll">
+                    <span class="marquee-inner">💘 YOU HAVE MATCHED WITH MICHAEL 💘 DON'T BLOW IT 💘 THIS SITE IS HOT OFF THE PRESS 💘 TELL YOUR FRIENDS 💘 &nbsp;&nbsp;&nbsp; 💘 YOU HAVE MATCHED WITH MICHAEL 💘 DON'T BLOW IT 💘 THIS SITE IS HOT OFF THE PRESS 💘 TELL YOUR FRIENDS 💘</span>
+                </div>
             </div>
             <div class="win-box">
                 <div class="title-bar">
@@ -443,7 +421,9 @@
             <canvas id="confetti-canvas"></canvas>
             <div class="thank-you-content">
                 <div class="marquee-wrap" style="margin-bottom: 16px;">
-                    <span class="marquee-inner">🎉 FUMBLE AVOIDED! 🎉 DATE SECURED! 🎉 MISSION COMPLETE! 🎉 CONGRATS! 🎉</span>
+                    <div class="marquee-scroll">
+                        <span class="marquee-inner">🎉 FUMBLE AVOIDED! 🎉 DATE SECURED! 🎉 MISSION COMPLETE! 🎉 CONGRATS! 🎉 &nbsp;&nbsp;&nbsp; 🎉 FUMBLE AVOIDED! 🎉 DATE SECURED! 🎉 MISSION COMPLETE! 🎉 CONGRATS! 🎉</span>
+                    </div>
                 </div>
                 <div class="win-box">
                     <div class="title-bar">
@@ -468,9 +448,6 @@
         </section>
 
     </div>
-    <!-- Floating music toggle — hidden until user chooses Yes on music screen -->
-    <button id="music-toggle" onclick="toggleMusic()" title="Toggle music">♪</button>
-
     <script src="script.js"></script>
 </body>
 </html>

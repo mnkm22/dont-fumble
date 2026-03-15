@@ -141,10 +141,17 @@ body::after {
   background: var(--navy);
   border: 3px solid;
   border-color: var(--bevel-lt) var(--bevel-dk) var(--bevel-dk) var(--bevel-lt);
-  padding: 5px 0;
+  padding: 0;
   margin-bottom: 14px;
+  display: flex;
+  align-items: center;
   overflow: hidden;
-  white-space: nowrap;
+}
+
+.marquee-scroll {
+  flex: 1;
+  overflow: hidden;
+  padding: 5px 0;
 }
 
 .marquee-inner {
@@ -156,6 +163,30 @@ body::after {
   font-family: 'Comic Neue', cursive;
   font-weight: 700;
   letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.marquee-btn {
+  flex-shrink: 0;
+  display: none;
+  width: 44px;
+  height: 100%;
+  min-height: 34px;
+  background: var(--silver);
+  border: none;
+  border-left: 3px solid;
+  border-color: var(--bevel-dk);
+  cursor: pointer;
+  font-size: 1rem;
+  font-family: 'Comic Neue', cursive;
+  font-weight: 700;
+  color: #000080;
+  align-items: center;
+  justify-content: center;
+}
+
+.marquee-btn:active {
+  background: #b0b0a8;
 }
 
 @keyframes marquee {
