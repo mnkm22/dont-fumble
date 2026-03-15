@@ -9,8 +9,17 @@
 <body>
     <div id="app">
         <!-- Hero Section -->
-        <section class="screen active" id="screen-hero">
-            <h1>Well well well, what do we have here?</h1>
+                <!-- Music Choice Screen -->
+        <section class="screen active" id="screen-music">
+            <h2>🎵 Background Music?</h2>
+            <p>Would you like some vibes while you navigate this experience?</p>
+            <div class="options">
+                <button class="btn-option" onclick="startMusic(true)">Yes, play the music ✨</button>
+                <button class="btn-option" onclick="startMusic(false)">No thanks, keep it quiet</button>
+            </div>
+        </section>
+
+        <section class="screen" id="screen-hero">            <h1>Well well well, what do we have here?</h1>
             <p>Choose carefully. Some paths may lead to banter, beverages, and unforeseen chemistry.</p>
             <button class="btn-primary" onclick="nextScreen('screen-disclaimer')">Enter the portal</button>
         </section>
@@ -175,6 +184,12 @@
             </div>
         </section>
     </div>
+
+        <!-- Background Music -->
+    <audio id="background-music" loop>
+        <source src="music/it-aint-over.mp3" type="audio/mpeg">
+    </audio>
+
 
     <script src="script.js"></script>
 </body>
