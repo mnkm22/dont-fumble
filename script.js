@@ -162,13 +162,22 @@ function resetNoBtn() {
     noBtn.removeAttribute('style');
     noBtn.style.position = 'relative';
     noBtn.onmouseover = null;
-    noBtn.ontouchstart = null;
     noBtn.onclick = null;
     noBtn.title = '';
+    // Remove old touch listener if any, then add fresh one
+    noBtn.removeEventListener('touchstart', handleNoBtnTouch);
     setTimeout(() => {
         noBtn.onmouseover = dodgeNo;
-        noBtn.ontouchstart = dodgeNo; // mobile touch equivalent
+        noBtn.addEventListener('touchstart', handleNoBtnTouch, { passive: false });
     }, 50);
+}
+
+function handleNoBtnTouch(e) {
+    if (dodgeCount < MAX_DODGES) {
+        e.preventDefault(); // blocks the click that follows touchstart
+        dodgeNo();
+    }
+    // If dodgeCount >= MAX_DODGES, do nothing — let onclick handle it
 }
 
 const finalScreen = document.getElementById('screen-final');
