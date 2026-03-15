@@ -15,7 +15,7 @@ let bgMusic = null;
 
 function startMusic(play) {
     if (play) {
-        bgMusic = new Audio('https://mnkm22.github.io/dont-fumble/music/it-aint-over.mp3');
+        bgMusic = new Audio('https://mnkm22.github.io/dont-fumble/it-aint-over.mp3');
         bgMusic.loop = true;
         bgMusic.volume = 0.75;
         bgMusic.play().then(() => updateToggle()).catch(() => updateToggle());
@@ -37,7 +37,7 @@ function updateToggle() {
 function toggleMusic() {
     // If they said No originally, create audio fresh on this direct click
     if (!bgMusic) {
-        bgMusic = new Audio('https://mnkm22.github.io/dont-fumble/music/it-aint-over.mp3');
+        bgMusic = new Audio('https://mnkm22.github.io/dont-fumble/it-aint-over.mp3');
         bgMusic.loop = true;
         bgMusic.volume = 0.75;
     }
