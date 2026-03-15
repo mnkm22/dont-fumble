@@ -151,7 +151,7 @@ body::after {
   display: inline-block;
   animation: marquee 12s linear infinite;
   font-size: 0.75rem;
-  color: var(--lime);
+  color: var(--navy);
   font-family: 'Comic Neue', cursive;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -505,13 +505,14 @@ p {
 .under-construction {
   font-size: 0.75rem;
   color: #000080;
-  background: transparent;
+  background: var(--yellow);
   display: inline-block;
   padding: 3px 10px;
   font-weight: 700;
   letter-spacing: 0.1em;
   margin-bottom: 12px;
-  border: none;
+  border: 2px solid;
+  border-color: var(--bevel-lt) var(--bevel-dk) var(--bevel-dk) var(--bevel-lt);
 }
 
 /* ── RESPONSIVE ── */
