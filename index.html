@@ -36,13 +36,13 @@
         /* ── No button stays in flow ── */
         #noBtn { position: relative; }
 
-        /* ── Music toggle sits above the win-box ── */
+        /* ── Music toggle bottom right ── */
         .win-container { position: relative; max-width: 620px; width: 100%; }
         #music-toggle {
             display: none;
-            position: absolute;
-            top: -34px;
-            right: 0;
+            position: fixed;
+            bottom: 16px;
+            right: 16px;
             background: var(--silver);
             border: 3px solid;
             border-color: var(--bevel-lt) var(--bevel-dk) var(--bevel-dk) var(--bevel-lt);
@@ -52,8 +52,9 @@
             font-family: 'Comic Neue', cursive;
             font-weight: 700;
             color: #000080;
-            padding: 4px 10px;
+            padding: 6px 12px;
             white-space: nowrap;
+            z-index: 9999;
         }
         #music-toggle:active {
             border-color: var(--bevel-dk) var(--bevel-lt) var(--bevel-lt) var(--bevel-dk);
@@ -442,10 +443,10 @@
             </div>
         </section>
 
-        <!-- ── THANK YOU — FIX 5: new pro tip ── -->
-        <section class="screen" id="thank-you">
-            <canvas id="confetti-canvas"></canvas>
-            <div class="thank-you-content">
+        <!-- ── THANK YOU ── -->
+        <section class="screen" id="thank-you" style="position: relative;">
+            <canvas id="confetti-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2;"></canvas>
+            <div style="position: relative; z-index: 3; width: 100%;">
                 <div class="marquee-wrap" style="margin-bottom: 16px;">
                     <div class="marquee-scroll">
                         <span class="marquee-inner">🎉 FUMBLE AVOIDED! 🎉 DATE SECURED! 🎉 MISSION COMPLETE! 🎉 CONGRATS! 🎉 &nbsp;&nbsp;&nbsp; 🎉 FUMBLE AVOIDED! 🎉 DATE SECURED! 🎉 MISSION COMPLETE! 🎉 CONGRATS! 🎉</span>
@@ -463,9 +464,9 @@
                         <h2>Congrats on not fumbling 😌</h2>
                         <div class="inset">
                             Michael will be in touch soon 💌<br><br>
-                            🏆 Fun fact: You just completed a 9-screen obstacle course<br>
-                            designed by a man who googled "how to talk to women" 😭<br>
-                            You deserve a medal. And also probably a drink.
+                            🏆 You just made it through a 9-screen obstacle course<br>
+                            crafted with equal parts effort and audacity.<br>
+                            Your reward? A very good drink, and possibly Michael. 🥂
                         </div>
                         <img src="https://media.giphy.com/media/111ebonMs90YLu/giphy.gif" alt="Success" style="max-width: 280px; display: block; margin: 16px auto; border: 3px solid; border-color: #fff #555 #555 #fff; box-shadow: 3px 3px 0 #000;">
                     </div>

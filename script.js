@@ -152,11 +152,34 @@ function startConfetti() {
 }
 
 // ── NO BUTTON ──
-// Starts in flow under "Potentially, convince me".
-// Moves to a random position on hover — twice.
-// On the 3rd hover it stops moving and becomes clickable.
+// Reset state every time the final screen becomes active
+// so the button always starts in the correct in-flow position.
 const MAX_DODGES = 2;
 let dodgeCount = 0;
+
+const finalScreen = document.getElementById('screen-final');
+if (finalScreen) {
+    const finalObserver = new MutationObserver(mutations => {
+        mutations.forEach(m => {
+            if (m.target.classList.contains('active')) {
+                // Reset button to in-flow position
+                dodgeCount = 0;
+                const noBtn = document.getElementById('noBtn');
+                if (noBtn) {
+                    noBtn.style.position = 'relative';
+                    noBtn.style.left = 'auto';
+                    noBtn.style.top = 'auto';
+                    noBtn.style.transition = 'none';
+                    noBtn.style.zIndex = 'auto';
+                    noBtn.onmouseover = dodgeNo;
+                    noBtn.onclick = null;
+                    noBtn.title = '';
+                }
+            }
+        });
+    });
+    finalObserver.observe(finalScreen, { attributes: true, attributeFilter: ['class'] });
+}
 
 function dodgeNo() {
     const noBtn = document.getElementById('noBtn');
@@ -165,11 +188,12 @@ function dodgeNo() {
     dodgeCount++;
 
     if (dodgeCount > MAX_DODGES) {
-        // Already surrendered — do nothing (onclick handles it)
+        noBtn.onmouseover = null;
+        noBtn.onclick = () => answer('final', 'no-means-yes', 'screen-loading');
+        noBtn.title = 'Fine. You win. 😤';
         return;
     }
 
-    // Pull out of flow and jump to a random spot
     const maxX = window.innerWidth  - 220;
     const maxY = window.innerHeight - 60;
     const randomX = Math.max(10, Math.random() * maxX);
@@ -182,7 +206,6 @@ function dodgeNo() {
     noBtn.style.zIndex = '1000';
 
     if (dodgeCount === MAX_DODGES) {
-        // Next interaction — stop running, become clickable
         noBtn.onmouseover = null;
         noBtn.onclick = () => answer('final', 'no-means-yes', 'screen-loading');
         noBtn.title = 'Fine. You win. 😤';
