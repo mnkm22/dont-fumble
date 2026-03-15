@@ -18,12 +18,14 @@ function nextScreen(screenId) {
 // BUG FIX 1: startMusic was missing entirely — this function is called by
 // the Yes/No buttons on the very first screen. Without it, the site was stuck.
 function startMusic(play) {
-    if (play) {
-        const music = document.getElementById('background-music');
-        if (music) {
-            music.play().catch(() => {
-                // Autoplay is blocked by some browsers — this silently handles that
-            });
+    const music = document.getElementById('background-music');
+    if (play && music) {
+        music.muted = false;
+        music.volume = 1;
+        music.load();
+        const playPromise = music.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(() => {});
         }
     }
     nextScreen('screen-hero');
