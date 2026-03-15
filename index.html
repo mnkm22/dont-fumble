@@ -6,7 +6,6 @@
     <title>DONT FUMBLE.EXE ★ Welcome ★</title>
     <link rel="stylesheet" href="style.css" />
     <style>
-        /* ── FIX 1: Live dot for meme-1 ── */
         .live-badge {
             display: inline-flex;
             align-items: center;
@@ -32,35 +31,6 @@
             0%, 100% { opacity: 1; }
             50%       { opacity: 0; }
         }
-
-        /* ── No button stays in flow ── */
-        #noBtn { position: relative; }
-
-        /* ── Music toggle bottom right ── */
-        .win-container { position: relative; max-width: 620px; width: 100%; }
-        #music-toggle {
-            display: none;
-            position: fixed;
-            bottom: 16px;
-            right: 16px;
-            background: var(--silver);
-            border: 3px solid;
-            border-color: var(--bevel-lt) var(--bevel-dk) var(--bevel-dk) var(--bevel-lt);
-            box-shadow: 2px 2px 0 #000;
-            cursor: pointer;
-            font-size: 0.78rem;
-            font-family: 'Comic Neue', cursive;
-            font-weight: 700;
-            color: #000080;
-            padding: 6px 12px;
-            white-space: nowrap;
-            z-index: 9999;
-        }
-        #music-toggle:active {
-            border-color: var(--bevel-dk) var(--bevel-lt) var(--bevel-lt) var(--bevel-dk);
-            box-shadow: none;
-            transform: translate(2px, 2px);
-        }
     </style>
 </head>
 <body>
@@ -69,10 +39,7 @@
         <!-- ── MUSIC CHOICE ── -->
         <section class="screen active" id="screen-music">
             <div class="marquee-wrap">
-                <div class="marquee-scroll">
-                    <span class="marquee-inner">★ WELCOME TO DONT-FUMBLE.COM ★ BEST VIEWED IN NETSCAPE NAVIGATOR ★ 800x600 RESOLUTION RECOMMENDED ★ VISITORS: 0000247 ★ &nbsp;&nbsp;&nbsp; ★ WELCOME TO DONT-FUMBLE.COM ★ BEST VIEWED IN NETSCAPE NAVIGATOR ★ 800x600 RESOLUTION RECOMMENDED ★ VISITORS: 0000247 ★</span>
-                </div>
-                <button class="marquee-btn" id="music-toggle" onclick="toggleMusic()" title="Toggle music">♪</button>
+                <span class="marquee-inner">★ WELCOME TO DONT-FUMBLE.COM ★ BEST VIEWED IN NETSCAPE NAVIGATOR ★ 800x600 RESOLUTION RECOMMENDED ★ VISITORS: 0000247 ★ &nbsp;&nbsp;&nbsp; ★ WELCOME TO DONT-FUMBLE.COM ★ BEST VIEWED IN NETSCAPE NAVIGATOR ★ 800x600 RESOLUTION RECOMMENDED ★ VISITORS: 0000247 ★</span>
             </div>
             <div class="win-box">
                 <div class="title-bar">
@@ -100,13 +67,9 @@
         <!-- ── HERO ── -->
         <section class="screen" id="screen-hero">
             <div class="marquee-wrap">
-                <div class="marquee-scroll">
-                    <span class="marquee-inner">💘 YOU HAVE MATCHED WITH MICHAEL 💘 DON'T BLOW IT 💘 THIS SITE IS HOT OFF THE PRESS 💘 TELL YOUR FRIENDS 💘 &nbsp;&nbsp;&nbsp; 💘 YOU HAVE MATCHED WITH MICHAEL 💘 DON'T BLOW IT 💘 THIS SITE IS HOT OFF THE PRESS 💘 TELL YOUR FRIENDS 💘</span>
-                </div>
+                <span class="marquee-inner">💘 YOU HAVE MATCHED WITH MICHAEL 💘 DON'T BLOW IT 💘 THIS SITE IS HOT OFF THE PRESS 💘 TELL YOUR FRIENDS 💘 &nbsp;&nbsp;&nbsp; 💘 YOU HAVE MATCHED WITH MICHAEL 💘 DON'T BLOW IT 💘 THIS SITE IS HOT OFF THE PRESS 💘 TELL YOUR FRIENDS 💘</span>
             </div>
-            <div class="win-container">
-                <button id="music-toggle" onclick="toggleMusic()" title="Toggle music">♪ music</button>
-                <div class="win-box">
+            <div class="win-box">
                 <div class="title-bar">
                     <span class="title-bar-text">💘 dont_fumble.exe — Welcome</span>
                     <div class="title-bar-btns">
@@ -122,7 +85,6 @@
                     </div>
                     <button class="btn-primary" onclick="nextScreen('screen-disclaimer')">Enter the portal &gt;&gt;</button>
                 </div>
-            </div>
             </div>
         </section>
 
@@ -170,7 +132,7 @@
             </div>
         </section>
 
-        <!-- ── MEME 1 — FIX 1: live dot added ── -->
+        <!-- ── MEME 1 ── -->
         <section class="screen meme" id="meme-1">
             <div class="win-box">
                 <div class="title-bar">
@@ -180,7 +142,6 @@
                     </div>
                 </div>
                 <div class="win-body">
-                    <!-- Live badge with blinking dot -->
                     <div style="display:flex; justify-content:center; margin-bottom: 6px;">
                         <span class="live-badge"><span class="live-dot"></span> LIVE</span>
                     </div>
@@ -270,7 +231,7 @@
             </div>
         </section>
 
-        <!-- ── Q4 — FIX 3: JFK meme + IYKYK ── -->
+        <!-- ── Q4 ── -->
         <section class="screen" id="screen-q4">
             <div class="win-box">
                 <div class="title-bar">
@@ -368,7 +329,7 @@
             </div>
         </section>
 
-        <!-- ── FINAL QUESTION — FIX 4: No starts in flow, only last position clickable ── -->
+        <!-- ── FINAL QUESTION ── -->
         <section class="screen" id="screen-final">
             <div class="win-box">
                 <div class="title-bar">
@@ -383,7 +344,6 @@
                         <button class="btn-option" onclick="answer('final', 'yes', 'screen-loading')">😍 Yes, obviously</button>
                         <button class="btn-option" onclick="answer('final', 'snacks', 'screen-loading')">🍿 Yes, but I need snacks</button>
                         <button class="btn-option" onclick="answer('final', 'convince', 'screen-loading')">🤔 Potentially, convince me</button>
-                        <!-- Starts in flow, moves on hover, only clickable after max dodges -->
                         <button class="btn-option dodgy" id="noBtn" onmouseover="dodgeNo()">🚫 No</button>
                     </div>
                 </div>
@@ -445,12 +405,10 @@
 
         <!-- ── THANK YOU ── -->
         <section class="screen" id="thank-you" style="position: relative;">
-            <canvas id="confetti-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2;"></canvas>
-            <div style="position: relative; z-index: 3; width: 100%;">
-                <div class="marquee-wrap" style="margin-bottom: 16px;">
-                    <div class="marquee-scroll">
-                        <span class="marquee-inner">🎉 FUMBLE AVOIDED! 🎉 DATE SECURED! 🎉 MISSION COMPLETE! 🎉 CONGRATS! 🎉 &nbsp;&nbsp;&nbsp; 🎉 FUMBLE AVOIDED! 🎉 DATE SECURED! 🎉 MISSION COMPLETE! 🎉 CONGRATS! 🎉</span>
-                    </div>
+            <canvas id="confetti-canvas"></canvas>
+            <div style="position: relative; z-index: 3; width: 100%; display: flex; flex-direction: column; align-items: center;">
+                <div class="marquee-wrap" style="margin-bottom: 16px; max-width: 620px; width: 100%;">
+                    <span class="marquee-inner">🎉 FUMBLE AVOIDED! 🎉 DATE SECURED! 🎉 MISSION COMPLETE! 🎉 CONGRATS! 🎉 &nbsp;&nbsp;&nbsp; 🎉 FUMBLE AVOIDED! 🎉 DATE SECURED! 🎉 MISSION COMPLETE! 🎉 CONGRATS! 🎉</span>
                 </div>
                 <div class="win-box">
                     <div class="title-bar">
@@ -475,6 +433,8 @@
         </section>
 
     </div>
+
+    <!-- Single music toggle button, fixed bottom right -->
     <button id="music-toggle" onclick="toggleMusic()" title="Toggle music">♪ music</button>
 
     <script src="script.js"></script>
