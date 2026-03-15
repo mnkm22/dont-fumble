@@ -8,8 +8,8 @@
 </head>
 <body>
     <div id="app">
-        <!-- Hero Section -->
-                <!-- Music Choice Screen -->
+
+        <!-- Music Choice Screen -->
         <section class="screen active" id="screen-music">
             <h2>🎵 Background Music?</h2>
             <p>Would you like some vibes while you navigate this experience?</p>
@@ -19,7 +19,9 @@
             </div>
         </section>
 
-        <section class="screen" id="screen-hero">            <h1>Well well well, what do we have here?</h1>
+        <!-- Hero Screen -->
+        <section class="screen" id="screen-hero">
+            <h1>Well well well, what do we have here?</h1>
             <p>Choose carefully. Some paths may lead to banter, beverages, and unforeseen chemistry.</p>
             <button class="btn-primary" onclick="nextScreen('screen-disclaimer')">Enter the portal</button>
         </section>
@@ -97,7 +99,9 @@
             <div class="custom-suggestion">
                 <label for="date-suggestion">Or suggest something else:</label>
                 <input type="text" id="date-suggestion" name="custom_date_idea" placeholder="Your creative date idea..." />
-                                    <button class="btn-primary" id="date-suggestion-btn" style="margin-top: 15px;" onclick="nextScreen('screen-q5')">Continue ✨</button>
+                <!-- BUG FIX 3: Was calling nextScreen() directly, which skipped saving
+                     the custom input. Now calls submitCustomDate() which saves it first. -->
+                <button class="btn-primary" id="date-suggestion-btn" style="margin-top: 15px;" onclick="submitCustomDate()">Continue ✨</button>
             </div>
         </section>
 
@@ -169,7 +173,8 @@
                 <input type="hidden" name="answers" id="answersField">
                 <input type="hidden" name="score" id="scoreField">
                 <input type="text" name="name" placeholder="Your name" required>
-                    <input type="text" name="instagram" placeholder="Your Instagram handle" required>                <button type="submit" class="btn-primary">Submit & See You Soon</button>
+                <input type="text" name="instagram" placeholder="Your Instagram handle" required>
+                <button type="submit" class="btn-primary">Submit & See You Soon</button>
             </form>
         </section>
 
@@ -180,16 +185,16 @@
                 <h1 class="glow">🎉 You did it! 🎉</h1>
                 <h2>Congrats on not fumbling</h2>
                 <p class="result-text">Michael will review your responses and reach out soon</p>
-                    <p class="meme-text">Pro tip: He WILL stalk your Instagram before following you back 👀</p>                <img src="https://media.giphy.com/media/111ebonMs90YLu/giphy.gif" alt="Success" style="max-width: 300px; margin: 20px auto;">
+                <p class="meme-text">Pro tip: He WILL stalk your Instagram before following you back 👀</p>
+                <img src="https://media.giphy.com/media/111ebonMs90YLu/giphy.gif" alt="Success" style="max-width: 300px; margin: 20px auto;">
             </div>
         </section>
     </div>
 
-        <!-- Background Music -->
+    <!-- Background Music -->
     <audio id="background-music" loop>
         <source src="music/it-aint-over.mp3" type="audio/mpeg">
     </audio>
-
 
     <script src="script.js"></script>
 </body>
