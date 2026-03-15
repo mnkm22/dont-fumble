@@ -15,10 +15,24 @@ function nextScreen(screenId) {
     window.scrollTo(0, 0);
 }
 
+// BUG FIX 1: startMusic was missing entirely — this function is called by
+// the Yes/No buttons on the very first screen. Without it, the site was stuck.
+function startMusic(play) {
+    if (play) {
+        const music = document.getElementById('background-music');
+        if (music) {
+            music.play().catch(() => {
+                // Autoplay is blocked by some browsers — this silently handles that
+            });
+        }
+    }
+    nextScreen('screen-hero');
+}
+
 // Answer handler with scoring
 function answer(question, value, nextScreenId) {
     userData.answers[question] = value;
-        
+
     let points = 0;
 
     // Question 2: Intent (high weight)
@@ -54,11 +68,23 @@ function answer(question, value, nextScreenId) {
     }
 
     userData.score += points;
-        
+
     // Navigate to the next screen
     if (nextScreenId) {
         nextScreen(nextScreenId);
     }
+}
+
+// BUG FIX 3: Custom date idea was never saved.
+// The "Continue" button on screen-q4 now calls this function instead of
+// nextScreen() directly, so the typed idea is captured before navigating.
+function submitCustomDate() {
+    const input = document.getElementById('date-suggestion');
+    const value = input ? input.value.trim() : '';
+    if (value) {
+        userData.answers['custom_date_idea'] = value;
+    }
+    nextScreen('screen-q5');
 }
 
 // Date input handlers
@@ -77,9 +103,15 @@ const form = document.getElementById('date-form');
 if (form) {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
+
         const formData = new FormData(form);
-        
+
+        // BUG FIX 2: The hidden fields answersField and scoreField were never
+        // populated, so Formspree received blank values. Now they're filled
+        // right before submission so all answers are recorded.
+        document.getElementById('answersField').value = JSON.stringify(userData.answers);
+        document.getElementById('scoreField').value = userData.score;
+
         // Add stored answers to form data
         for (let key in userData.answers) {
             if (key === 'dates') {
@@ -88,7 +120,7 @@ if (form) {
                 formData.append(key, userData.answers[key]);
             }
         }
-        
+
         try {
             const response = await fetch(form.action, {
                 method: 'POST',
@@ -97,7 +129,7 @@ if (form) {
                     'Accept': 'application/json'
                 }
             });
-            
+
             if (response.ok) {
                 // Show custom thank you screen instead of redirecting
                 nextScreen('thank-you');
@@ -115,15 +147,15 @@ if (form) {
 function startConfetti() {
     const canvas = document.getElementById('confetti-canvas');
     if (!canvas) return;
-    
+
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    
+
     const confetti = [];
     const confettiCount = 150;
     const colors = ['#ff0a54', '#ff477e', '#ff7096', '#ff85a1', '#fbb1bd', '#f9bec7'];
-    
+
     for (let i = 0; i < confettiCount; i++) {
         confetti.push({
             x: Math.random() * canvas.width,
@@ -136,10 +168,10 @@ function startConfetti() {
             tiltAngle: 0
         });
     }
-    
+
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
+
         confetti.forEach((c, i) => {
             ctx.beginPath();
             ctx.lineWidth = c.r / 2;
@@ -148,16 +180,16 @@ function startConfetti() {
             ctx.lineTo(c.x + c.tilt, c.y + c.tilt + c.r);
             ctx.stroke();
         });
-        
+
         update();
     }
-    
+
     function update() {
         confetti.forEach((c, i) => {
             c.tiltAngle += c.tiltAngleIncremental;
             c.y += (Math.cos(c.d) + 3 + c.r / 2) / 2;
             c.tilt = Math.sin(c.tiltAngle - i / 3) * 15;
-            
+
             if (c.y > canvas.height) {
                 confetti[i] = {
                     x: Math.random() * canvas.width,
@@ -172,25 +204,25 @@ function startConfetti() {
             }
         });
     }
-    
+
     setInterval(draw, 33);
 }
 
 // Dodge No button functionality
-// Track number of dodges
 let dodgeCount = 0;
 
 function dodgeNo() {
-        // Only dodge three times, then allow click        if (dodgeCount >= 3) {        answer('final', 'no-means-yes', 'screen-loading');
+    if (dodgeCount >= 3) {
+        answer('final', 'no-means-yes', 'screen-loading');
         return;
     }
-    
+
     dodgeCount++;
-    
+
     const noBtn = document.getElementById('noBtn');
     const randomX = Math.random() * (window.innerWidth - 200);
     const randomY = Math.random() * (window.innerHeight - 100);
-    
+
     noBtn.style.position = 'fixed';
     noBtn.style.left = randomX + 'px';
     noBtn.style.top = randomY + 'px';
@@ -200,30 +232,27 @@ function dodgeNo() {
 // Auto-advance from loading screen to result screen
 const loadingScreen = document.getElementById('screen-loading');
 if (loadingScreen) {
-    // Detect when loading screen becomes active
     const observer = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
             if (mutation.target.classList.contains('active')) {
-                // Wait 3 seconds then show result screen
                 setTimeout(() => {
                     nextScreen('screen-result');
                 }, 3000);
             }
         });
     });
-    
+
     observer.observe(loadingScreen, {
         attributes: true,
         attributeFilter: ['class']
     });
 }
 
-
 // Dopamine hit - quick celebration when answering
 function celebrate() {
     const emojis = ['✨', '👏', '🚀', '🎉', '💯', '⭐', '🔥'];
     const emoji = emojis[Math.floor(Math.random() * emojis.length)];
-    
+
     const celebration = document.createElement('div');
     celebration.textContent = emoji;
     celebration.style.position = 'fixed';
@@ -233,8 +262,8 @@ function celebrate() {
     celebration.style.zIndex = '10000';
     celebration.style.pointerEvents = 'none';
     celebration.style.animation = 'float-up 1s ease-out';
-    
+
     document.body.appendChild(celebration);
-    
+
     setTimeout(() => celebration.remove(), 1000);
 }
