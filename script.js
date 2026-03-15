@@ -19,9 +19,6 @@ function nextScreen(screenId) {
 function answer(question, value, nextScreenId) {
     userData.answers[question] = value;
         
-    // Dopamine hit!
-    if (typeof celebrate === 'function') celebrate();
-    // Calculate score based on answer
     let points = 0;
 
     // Question 2: Intent (high weight)
