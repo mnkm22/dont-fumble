@@ -20,8 +20,7 @@ function answer(question, value, nextScreenId) {
     userData.answers[question] = value;
         
     // Dopamine hit!
-    celebrate();
-
+    if (typeof celebrate === 'function') celebrate();
     // Calculate score based on answer
     let points = 0;
 
