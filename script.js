@@ -151,12 +151,11 @@ function startConfetti() {
     setInterval(draw, 33);
 }
 
-// ── FIX 4: NO BUTTON ──
-// Starts in normal document flow (in-line with other answers).
-// Moves on hover up to MAX_DODGES times.
-// After MAX_DODGES the onmouseover is removed and onclick is added
-// so the button is finally clickable.
-const MAX_DODGES = 3;
+// ── NO BUTTON ──
+// Starts in flow under "Potentially, convince me".
+// Moves to a random position on hover — twice.
+// On the 3rd hover it stops moving and becomes clickable.
+const MAX_DODGES = 2;
 let dodgeCount = 0;
 
 function dodgeNo() {
@@ -165,25 +164,14 @@ function dodgeNo() {
 
     dodgeCount++;
 
-    if (dodgeCount >= MAX_DODGES) {
-        // Stop running — remove the hover handler and make it clickable
-        noBtn.onmouseover = null;
-        noBtn.onclick = () => answer('final', 'no-means-yes', 'screen-loading');
-        // Snap it back into flow one last time so it's findable
-        noBtn.style.position = 'relative';
-        noBtn.style.left = 'auto';
-        noBtn.style.top = 'auto';
-        noBtn.style.transition = 'none';
-        noBtn.title = 'Fine. You win. 😤';
+    if (dodgeCount > MAX_DODGES) {
+        // Already surrendered — do nothing (onclick handles it)
         return;
     }
 
-    // Pull it out of flow and jump to a random spot
-    const btnRect = noBtn.getBoundingClientRect();
-    const maxX = window.innerWidth  - btnRect.width  - 20;
-    const maxY = window.innerHeight - btnRect.height - 20;
-
-    // Bias towards the opposite side of where the cursor likely is
+    // Pull out of flow and jump to a random spot
+    const maxX = window.innerWidth  - 220;
+    const maxY = window.innerHeight - 60;
     const randomX = Math.max(10, Math.random() * maxX);
     const randomY = Math.max(10, Math.random() * maxY);
 
@@ -192,15 +180,22 @@ function dodgeNo() {
     noBtn.style.top  = randomY + 'px';
     noBtn.style.transition = 'all 0.2s ease';
     noBtn.style.zIndex = '1000';
+
+    if (dodgeCount === MAX_DODGES) {
+        // Next interaction — stop running, become clickable
+        noBtn.onmouseover = null;
+        noBtn.onclick = () => answer('final', 'no-means-yes', 'screen-loading');
+        noBtn.title = 'Fine. You win. 😤';
+    }
 }
 
-// Auto-advance loading → result after 3s
+// Auto-advance loading → result after 5s
 const loadingScreen = document.getElementById('screen-loading');
 if (loadingScreen) {
     const observer = new MutationObserver(mutations => {
         mutations.forEach(m => {
             if (m.target.classList.contains('active')) {
-                setTimeout(() => nextScreen('screen-result'), 3000);
+                setTimeout(() => nextScreen('screen-result'), 5000);
             }
         });
     });

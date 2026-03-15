@@ -204,6 +204,8 @@ p {
   color: #000080;
   font-family: 'Comic Neue', cursive;
   line-height: 1.8;
+  white-space: nowrap;
+  overflow-x: auto;
 }
 
 /* ── BUTTONS ── */
@@ -322,6 +324,11 @@ p {
   80%  { width: 80%; }
   100% { width: 100%; }
 }
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--navy) 0%, var(--teal) 50%, var(--lime) 100%);
+  animation: prog-fill 5s ease-in-out forwards;
 
 /* ── CALENDAR ── */
 .calendar {
