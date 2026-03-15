@@ -159,16 +159,16 @@ function resetNoBtn() {
     dodgeCount = 0;
     const noBtn = document.getElementById('noBtn');
     if (!noBtn) return;
-    // Clear any fixed positioning first
     noBtn.removeAttribute('style');
-    // Now set only what we need
     noBtn.style.position = 'relative';
-    // Remove old handlers then re-attach fresh
     noBtn.onmouseover = null;
+    noBtn.ontouchstart = null;
     noBtn.onclick = null;
     noBtn.title = '';
-    // Small delay so the style reset renders before we attach the hover
-    setTimeout(() => { noBtn.onmouseover = dodgeNo; }, 50);
+    setTimeout(() => {
+        noBtn.onmouseover = dodgeNo;
+        noBtn.ontouchstart = dodgeNo; // mobile touch equivalent
+    }, 50);
 }
 
 const finalScreen = document.getElementById('screen-final');
@@ -200,6 +200,7 @@ function dodgeNo() {
 
     if (dodgeCount >= MAX_DODGES) {
         noBtn.onmouseover = null;
+        noBtn.ontouchstart = null;
         noBtn.onclick = () => answer('final', 'no-means-yes', 'screen-loading');
         noBtn.title = 'Fine. You win. 😤';
     }
