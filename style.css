@@ -504,7 +504,7 @@ p {
 
 .under-construction {
   font-size: 0.75rem;
-  color: #000080;
+  color: #cc0000;
   background: var(--yellow);
   display: inline-block;
   padding: 3px 10px;
