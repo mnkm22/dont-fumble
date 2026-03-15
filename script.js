@@ -15,6 +15,18 @@ function nextScreen(screenId) {
     window.scrollTo(0, 0);
 }
 
+// Background music handler
+function startMusic(playMusic) {
+    const audio = document.getElementById('background-music');
+    
+    if (playMusic && audio) {
+        audio.play().catch(err => console.log('Audio play failed:', err));
+    }
+    
+    // Navigate to hero screen
+    nextScreen('screen-hero');
+}
+
 // Answer handler with scoring
 function answer(question, value, nextScreenId) {
     userData.answers[question] = value;
