@@ -11,46 +11,42 @@ function nextScreen(screenId) {
 }
 
 // ── MUSIC ──
-// We create the Audio element up front so the browser has it ready.
-// play() is called inside the click handler (user gesture).
-// A floating ♪ toggle button appears on every screen after the first —
-// this gives the user a visible way to start/stop music at any time,
-// which also acts as a fallback if autoplay was silently blocked.
 let bgMusic = null;
-let musicEnabled = false;
 
 function startMusic(play) {
-    musicEnabled = play;
     if (play) {
-        bgMusic = new Audio('music/it-aint-over.mp3');
+        bgMusic = new Audio('https://mnkm22.github.io/dont-fumble/music/it-aint-over.mp3');
         bgMusic.loop = true;
         bgMusic.volume = 0.75;
-        bgMusic.play();
+        bgMusic.play().then(() => updateToggle()).catch(() => updateToggle());
     }
-    showMusicToggle();
+    const btn = document.getElementById('music-toggle');
+    if (btn) btn.style.display = 'flex';
+    updateToggle();
     nextScreen('screen-hero');
 }
 
-function showMusicToggle() {
+function updateToggle() {
     const btn = document.getElementById('music-toggle');
-    if (btn) btn.style.display = 'flex';
+    if (!btn) return;
+    const playing = bgMusic && !bgMusic.paused;
+    btn.style.opacity = playing ? '1' : '0.4';
+    btn.title = playing ? 'Mute music' : 'Play music';
 }
 
 function toggleMusic() {
-    const btn = document.getElementById('music-toggle');
+    // If they said No originally, create audio fresh on this direct click
+    if (!bgMusic) {
+        bgMusic = new Audio('https://mnkm22.github.io/dont-fumble/music/it-aint-over.mp3');
+        bgMusic.loop = true;
+        bgMusic.volume = 0.75;
+    }
     if (bgMusic.paused) {
-        bgMusic.play().catch(() => {});
-        musicEnabled = true;
-        if (btn) btn.textContent = '♪';
-        if (btn) btn.title = 'Mute music';
+        bgMusic.play().then(() => updateToggle()).catch(() => updateToggle());
     } else {
         bgMusic.pause();
-        musicEnabled = false;
-        if (btn) btn.textContent = '♪';
-        if (btn) btn.style.opacity = '0.4';
-        if (btn) btn.title = 'Play music';
+        updateToggle();
     }
-    if (btn) btn.style.opacity = bgMusic.paused ? '0.4' : '1';
 }
 
 // Answer handler with scoring
